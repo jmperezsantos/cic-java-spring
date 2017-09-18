@@ -3,54 +3,57 @@ package mx.ipn.cic.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.ipn.cic.model.User;
+import mx.ipn.cic.repositories.UserRepository;
 
 @Service
 public class UserService {
 
-	private List<User> users = new ArrayList<User>();
-	private long max = 0;
+	@Autowired
+	private UserRepository userReposiory;
 
 	public List<User> getAll() {
-		return this.users;
+
+		List<User> users = this.userReposiory.fetchAll();
+
+		return users;
+
 	}
 
-	public User findById(long id) {
+	public User findById(Integer id) {
 
-		User u = null;
-		for (User user : this.users) {
-			if (user.getId() == id) {
-				u = user;
-				break;
-			}
-		}
+		User user = this.userReposiory.fetchById(id);
 
-		return u;
+		return user;
 
 	}
 
 	public User create(User user) {
 
-		user.setId(++max);
-
-		this.users.add(user);
+		user = this.userReposiory.save(user);
 
 		return user;
-	}
-
-	public boolean delete(long id) {
-
-		User user = this.findById(id);
-
-		return this.users.remove(user);
-
 	}
 
 	public User update(User user) {
 
+		user = this.userReposiory.update(user);
+		
 		return user;
+
+	}
+	
+	public boolean delete(Integer id) {
+
+		User user = this.findById(id);
+		
+		boolean success = this.userReposiory.delete(user);
+		
+		return success;
+				
 
 	}
 

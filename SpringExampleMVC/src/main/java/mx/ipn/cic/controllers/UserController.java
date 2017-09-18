@@ -40,7 +40,7 @@ public class UserController {
 	 * @return path al jsp requerido
 	 */
 	@RequestMapping(value = "/{id}/updateForm", method = RequestMethod.GET)
-	public String getupdateForm(@PathVariable long id, Model model) {
+	public String getupdateForm(@PathVariable Integer id, Model model) {
 
 		User user = this.userService.findById(id);
 
@@ -73,7 +73,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String getById(@PathVariable long id, Model model) {
+	public String getById(@PathVariable Integer id, Model model) {
 
 		User user = this.userService.findById(id);
 		model.addAttribute("user", user);
@@ -119,7 +119,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable long id, String name, String lastname, int age) {
+	public String update(@PathVariable Integer id, String name, String lastname, int age) {
 
 		User user = this.userService.findById(id);
 
@@ -147,7 +147,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String delete(@PathVariable long id) {
+	public String delete(@PathVariable Integer id) {
 
 		this.userService.delete(id);
 
