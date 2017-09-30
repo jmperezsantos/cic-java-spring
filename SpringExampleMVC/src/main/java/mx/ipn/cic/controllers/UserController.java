@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import mx.ipn.cic.model.Rol;
 import mx.ipn.cic.model.User;
+import mx.ipn.cic.services.GenericModelService;
 import mx.ipn.cic.services.UserService;
 
 @Controller
@@ -17,7 +19,8 @@ import mx.ipn.cic.services.UserService;
 public class UserController {
 
 	@Autowired
-	private UserService userService;
+	//private UserService userService;
+	private GenericModelService<User> userService;
 
 	// Método se formularios
 
@@ -42,7 +45,7 @@ public class UserController {
 	@RequestMapping(value = "/{id}/updateForm", method = RequestMethod.GET)
 	public String getupdateForm(@PathVariable Integer id, Model model) {
 
-		User user = this.userService.findById(id);
+		User user = this.userService.findById(User.class, id);
 
 		model.addAttribute("user", user);
 
@@ -59,7 +62,7 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAll(Model model) {
 
-		List<User> userList = this.userService.getAll();
+		List<User> userList = this.userService.getAll(User.class);
 		model.addAttribute("users", userList);
 
 		return "user/all";
@@ -75,7 +78,7 @@ public class UserController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getById(@PathVariable Integer id, Model model) {
 
-		User user = this.userService.findById(id);
+		User user = this.userService.findById(User.class, id);
 		model.addAttribute("user", user);
 
 		return "user/single_user";
@@ -121,7 +124,7 @@ public class UserController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable Integer id, String name, String lastname, int age) {
 
-		User user = this.userService.findById(id);
+		User user = this.userService.findById(User.class, id);
 
 		if (user != null) {
 
@@ -149,7 +152,7 @@ public class UserController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable Integer id) {
 
-		this.userService.delete(id);
+		this.userService.delete(User.class, id);
 
 		// model.addAttribute("message", "Usuario eliminado con id: +
 		// user.getId()");

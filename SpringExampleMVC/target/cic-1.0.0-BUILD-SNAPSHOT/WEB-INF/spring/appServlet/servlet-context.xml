@@ -29,9 +29,9 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url"
-			value="jdbc:mysql://localhost:3306/empresa" />
+			value="jdbc:mysql://localhost:3306/library" />
 		<beans:property name="username" value="root" />
-		<beans:property name="password" value="Enigmass1" />
+		<beans:property name="password" value="Password123." />
 	</beans:bean>
 
 	<beans:bean id="sessionFactory"
@@ -39,7 +39,12 @@
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
+				
+				<beans:value>mx.ipn.cic.model.Rol</beans:value>
 				<beans:value>mx.ipn.cic.model.User</beans:value>
+				<beans:value>mx.ipn.cic.model.Book</beans:value>
+				<beans:value>mx.ipn.cic.model.Loan</beans:value>
+				
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">

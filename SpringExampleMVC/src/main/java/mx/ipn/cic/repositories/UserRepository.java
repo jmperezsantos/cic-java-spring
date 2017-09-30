@@ -1,6 +1,5 @@
 package mx.ipn.cic.repositories;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.HibernateException;
