@@ -13,6 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity(name = "user")
 @Table(name = "user")
 public class User implements Serializable {
@@ -37,6 +42,7 @@ public class User implements Serializable {
 	@JoinColumn(name = "rolId", referencedColumnName = "id")
 	private Rol rol;
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "user")
 	private List<Loan> loans;
 

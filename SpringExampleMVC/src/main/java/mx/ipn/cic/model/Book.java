@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 @Entity(name = "book")
 @Table(name = "book")
 public class Book implements Serializable {
@@ -37,6 +39,7 @@ public class Book implements Serializable {
 	@Column(name = "available")
 	private int available;
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "book")
 	private List<Loan> loans;
 

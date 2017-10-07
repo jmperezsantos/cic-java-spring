@@ -39,18 +39,28 @@ public class GenericModelService<T> {
 	public T update(T entity) {
 
 		entity = this.genericRepository.update(entity);
-		
+
 		return entity;
 
 	}
-	
+
 	public boolean delete(Class<T> classType, Integer id) {
 
-		T entity = this.findById(classType, id);
-		
-		boolean success = this.genericRepository.delete(entity);
-		
+		boolean success = true;
+
+		try {
+
+			T entity = this.findById(classType, id);
+
+			this.genericRepository.delete(entity);
+
+		} catch (Exception e) {
+
+			success = false;
+
+		}
+
 		return success;
-		
+
 	}
 }

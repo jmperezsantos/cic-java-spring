@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 @Entity(name = "loan")
 @Table(name = "loan")
 public class Loan implements Serializable {
@@ -26,10 +28,12 @@ public class Loan implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "bookId", referencedColumnName = "id")
 	private Book book;

@@ -9,20 +9,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import mx.ipn.cic.model.Rol;
 import mx.ipn.cic.model.User;
 import mx.ipn.cic.services.GenericModelService;
-import mx.ipn.cic.services.UserService;
 
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
 
 	@Autowired
-	//private UserService userService;
+	// private UserService userService;
 	private GenericModelService<User> userService;
 
-	// Método se formularios
+	// Métodos de formularios
 
 	/**
 	 * Obtiene el formulario de nuevo registro
@@ -96,10 +94,10 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	//public String newRegister(String name, String lastname, int age) {
+	// public String newRegister(String name, String lastname, int age) {
 	public String newRegister(User newUser) {
 
-//		User newUser = new User(name, lastname, age);
+		// User newUser = new User(name, lastname, age);
 		this.userService.create(newUser);
 
 		// model.addAttribute("message", "Usuario creado con id: " +

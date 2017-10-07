@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 @Entity(name = "rol")
 @Table(name = "rol")
 public class Rol implements Serializable {
@@ -31,6 +33,7 @@ public class Rol implements Serializable {
 	@Column(name="description")
 	private String description;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "rol")
 	private List<User> users;
 
