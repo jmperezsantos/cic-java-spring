@@ -42,28 +42,41 @@ public class HomeController {
 		restTemplate.getMessageConverters().add(messageConverter);
 
 		HttpHeaders headers = new HttpHeaders();
-		//headers.setContentType(MediaType.APPLICATION_JSON);
+		// headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+
+		// Para consumir un arreglo (colección) de elementos
 		HttpEntity<User[]> entity = new HttpEntity<User[]>(headers);
 
 		ResponseEntity<User[]> responseEntity = 
 				restTemplate.exchange("http://127.0.0.1:8080/cic/rest/user",
-				HttpMethod.GET,
-				entity, 
+				HttpMethod.GET, 
+				entity,
 				User[].class);
-		
+
 		User[] users = responseEntity.getBody();
-		
+
 		List<User> userList = Arrays.asList(users);
 
 		logger.info(users.toString());
+
+		// Para registrar/actualizar un elemento
+		User user = new User("Nombre", "Apellido", 18);
+		
+		HttpEntity<User> entityPOST = new HttpEntity<User>(user, headers);
+
+		ResponseEntity<User> responseEntityPOST = 
+				restTemplate.exchange("http://127.0.0.1:8080/cic/rest/user",
+				HttpMethod.POST, //HttpMethod.PUT para el caso de actualizaciones 
+				entityPOST,
+				User.class);
+
+		user = responseEntityPOST.getBody();
+
+		logger.info(user.toString());
 
 		return "home";
 
 	}
 
 }
-
-
-
-
